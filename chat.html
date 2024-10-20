@@ -1,253 +1,133 @@
-<style>
-    body {
-        background-color: #f0f0f0; /* Fundo neutro claro */
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        color: #333; /* Texto escuro */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
-
-    h1 {
-        color: #2c3e50; /* Azul-marinho */
-        font-size: 2.5rem;
-        margin: 20px 0;
-        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
-        background: linear-gradient(to right, #e0e0e0, #2c3e50); /* Gradiente com tons claros e azul-marinho */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        padding: 10px 0;
-        border-radius: 10px;
-        border: 2px solid #b0b0b0; /* Borda cinza claro */
-    }
-
-    .container {
-        background-color: #f1f1f1;
-        padding: 30px;
-        border-radius: 15px;
-        width: 340px;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        border: 1px solid #b0b0b0;
-        display: flex;
-        flex-direction: column;
-        height: 500px;
-    }
-
-    .message-box {
-        background-color: #ffffff;
-        border-radius: 10px;
-        padding: 10px;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        width: 100%; /* Garante que a largura seja 100% do contêiner */
-        height: 70%;
-        overflow-y: scroll;
-        margin-bottom: 20px;
-        border: 2px solid #2c3e50; /* Azul-marinho */
-        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para borda e sombra */
-    }
-
-    .message-box:hover {
-        border-color: #d4af37; /* Dourado ao passar o mouse */
-        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Sombra mais intensa ao passar o mouse */
-    }
-
-    /* Adiciona flex para alinhar as mensagens à esquerda ou direita */
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 5px; /* Diminuindo o espaço entre as mensagens */
-    }
-
-    /* Mensagens enviadas (direita) */
-    .message.sent {
-        background-color: #d4af37; /* Dourado para as mensagens enviadas */
-        color: white;
-        text-align: left;
-        align-self: flex-end; /* Alinhando à direita */
-        border-radius: 15px 15px 15px 0;
-        padding: 10px;
-        margin: 2px 0; /* Diminuindo a margem entre mensagens */
-        max-width: 70%;
-        word-wrap: break-word;
-    }
-
-    /* Mensagens recebidas (esquerda) */
-    .message.received {
-        background-color: #2c3e50; /* Azul-marinho para as mensagens recebidas */
-        color: white;
-        text-align: right;
-        align-self: flex-start; /* Alinhando à esquerda */
-        border-radius: 15px 15px 0 15px;
-        padding: 10px;
-        margin: 2px 0; /* Diminuindo a margem entre mensagens */
-        max-width: 70%;
-        word-wrap: break-word;
-    }
-
-    /* Estilo geral das mensagens */
-    .message {
-        display: inline-block;
-        margin: 5px 0; /* Diminuindo a margem entre mensagens */
-        padding: 8px 12px;
-        border-radius: 8px;
-        word-wrap: break-word;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #chat-form {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    input[type="text"] {
-        width: 80%;
-        padding: 10px;
-        border: 2px solid #2c3e50; /* Borda azul-marinho */
-        border-radius: 8px;
-        box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
-    }
-
-    input[type="text"]:focus {
-        border-color: #d4af37; /* Dourado ao focar */
-        outline: none;
-    }
-
-    button {
-        background-color: #2c3e50; /* Azul-marinho */
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        margin-left: 10px;
-    }
-
-    button:hover {
-        background-color: #d4af37; /* Dourado ao passar o mouse */
-        transform: scale(1.05);
-    }
-
-    @media (max-width: 600px) {
-        .container {
-            width: 95%;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #8c8c8d;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            display: block; 
+            height: 100px;
+            margin: 50px;
+            text-align: center; 
+        }
+        .login-container {
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            background-color: #ffffff; 
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px; 
+            margin: auto; 
+            transition: transform 0.3s ease; 
         }
 
+        .login-container:hover {
+            transform: scale(1.02);
+        }
         h1 {
-            font-size: 2rem;
+            margin-bottom: 5px;
+            font-size: 30px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            color: #2c3e50;
         }
 
-        .message-box {
-            height: 50%;
+        h2{
+            margin-bottom: 10px;
+            font-size: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            color: #2c3e50;
         }
-    }
+        input {
+            padding: 10px;
+            margin-top: 10px;
+            border: 2px solid #2c3e50; 
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px; 
+            transition: border-color 0.3s; 
+        }
+        input:focus {
+            border-color: #d4af37; 
+            outline: none; 
+        }
+        button {
+            background-color: #2c3e50; 
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px; 
+            transition: background-color 0.3s; 
+        }
+        button:hover {
+            background-color: #d4af37; 
+        }
+        .icon {
+            margin-bottom: 10px; 
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 15px;
+            color: #2c3e50; 
+        }
+        a {
+            color: #2c3e50; 
+            text-decoration: none; 
+        }
+        a:hover {
+            text-decoration: underline; 
+        }
+        .footer-message {
+            margin-top: 20px; 
+            font-size: 12px; 
+            color: #2c3e50; 
+            width: 100%;            
+            bottom: 10px; 
+        }
+    </style>
+</head>
+<body>
 
-
-    
-</style>
-<h1>Chic-Chat</h1>
-
-<div class="container">
-    <div class="message-box">
-        <ul></ul>
+<div class="login-container">
+    <div class="icon">
+        <h1>Easy Chat</h1>
+        <img src="https://img.icons8.com/?size=100&id=42782&format=png&color=000000" alt="Ícone de Usuário" width="100">
     </div>
 
-
-     <div class="chat-container" id="chat-container">
-        <!-- As mensagens serão inseridas aqui dinamicamente -->
-      </div>
-    
-
-    <div id="chat-form">
-        <input type="text" id="message-input" placeholder="Digite essa mensagem">
-        <button onclick="enviar()">Enviar</button>
-         <button onclick="logout()">Sair</button>
+    <h2>Login</h1>
+    <input type="text" id="username" placeholder="Digite seu nome" required>
+    <button onclick="login()">Entrar</button>
+    <div class="footer">
+        <p>Não tem uma conta? <a href="#">Crie uma aqui</a></p>
     </div>
-
-    <div id="error-message" style="color: red; margin-top: 10px;"></div> 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.0/socket.io.js"></script>
+<div class="footer-message">
+    Desenvolvido por EquipeX &copy; - 2024
+</div>
 
 <script>
-   
-        // Redireciona para login se o usuário não estiver logado
-        if (!localStorage.getItem("username")) {
-            window.location.href = "login.html"; 
+    function login() {
+        const username = document.getElementById("username").value.trim();
+        if (username) {
+            localStorage.setItem("username", username);
+            window.location.href = "chat.html"; 
+        } else {
+            alert("Por favor, digite um nome."); 
         }
-// real
-// const socket = io("https://d9c64b8b-4079-4b38-a56a-6838a5b10c7d-00-2d60qqpi6u3px.picard.replit.dev:3000/"); 
-
-// pode mudar
-const socket = io("https://b64420f9-fb71-49f8-9908-cef05bc750f4-00-13aggwbdtvjy2.janeway.replit.dev:3000/"); 
-
-        const username = localStorage.getItem("username") || "Usuário Anônimo";
-
-        socket.on("connect", () => {
-            console.log("Usuário conectado");
-        });
-
-        // Substitua a função anterior por essa
-        socket.on("message", (msg) => {
-            console.log(msg);
-            const ul = document.querySelector("ul");
-
-            // Verifica se a mensagem foi enviada pelo usuário atual
-            const isCurrentUser = msg.startsWith(`${username}:`);
-
-            // Define a classe com base em quem enviou a mensagem
-            const messageClass = isCurrentUser ? 'sent' : 'received';
-
-            // Cria a nova mensagem com a classe apropriada
-            ul.innerHTML += `<li class="message ${messageClass}">${msg}</li>`;
-        });
-
-        function enviar() {
-            const msgInput = document.querySelector("#message-input");
-            const msg = msgInput.value.trim();
-            const errorMessage = document.getElementById("error-message");
-
-            errorMessage.textContent = "";
-
-            if (msg) {
-                const messageWithUsername = `${username}: ${msg}`;
-                socket.emit("message", messageWithUsername);
-                msgInput.value = "";
-            } else {
-                errorMessage.textContent = "Mensagem vazia não pode ser enviada.";
-            }
-        }
-
-        document
-            .querySelector("#message-input")
-            .addEventListener("keypress", (event) => {
-                if (event.key === "Enter") {
-                    enviar();
-                    event.preventDefault();
-                }
-            });
-
-        function logout() {
-            localStorage.removeItem("username"); 
-            alert("Você saiu."); 
-            window.location.href = "login.html"; 
-        }
-  
-
+    }
 </script>
 
-
-<!-- ´woidNCÍB´wufbíwng´9w48urhenviruh    9wuehfidhpuVGPUERF -->
+</body>
+</html>
