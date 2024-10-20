@@ -6,30 +6,43 @@
     <title>Login</title>
     <style>
         body {
-            background-color: #f0f0f0;
+            background-color: #8c8c8d;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            display: block; 
+            height: 100px;
+            margin: 50px;
+            text-align: center; 
         }
         .login-container {
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
             background-color: #ffffff; 
-            padding: 40px;
+            padding: 50px;
             border-radius: 15px;
-            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 400px; 
+            width: 300px; 
+            margin: auto; 
             transition: transform 0.3s ease; 
         }
+
         .login-container:hover {
             transform: scale(1.02);
         }
         h1 {
-            margin-bottom: 20px;
-            font-size: 28px;
+            margin-bottom: 5px;
+            font-size: 30px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            color: #2c3e50;
+        }
+
+        h2{
+            margin-bottom: 10px;
+            font-size: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
             color: #2c3e50;
         }
         input {
@@ -61,12 +74,12 @@
             background-color: #d4af37; 
         }
         .icon {
-            margin-bottom: 15px; 
+            margin-bottom: 10px; 
         }
         .footer {
             margin-top: 20px;
-            font-size: 14px;
-            color: #888888; 
+            font-size: 15px;
+            color: #2c3e50; 
         }
         a {
             color: #2c3e50; 
@@ -75,20 +88,33 @@
         a:hover {
             text-decoration: underline; 
         }
+        .footer-message {
+            margin-top: 20px; 
+            font-size: 12px; 
+            color: #2c3e50; 
+            width: 100%;            
+            bottom: 10px; 
+        }
     </style>
 </head>
 <body>
 
 <div class="login-container">
     <div class="icon">
-        <img src="https://img.icons8.com/ios/50/4a4a4a/user-male.png" alt="Ícone de Usuário" width="50">
+        <h1>Easy Chat</h1>
+        <img src="https://img.icons8.com/?size=100&id=42782&format=png&color=000000" alt="Ícone de Usuário" width="100">
     </div>
-    <h1>Login</h1>
+
+    <h2>Login</h1>
     <input type="text" id="username" placeholder="Digite seu nome" required>
     <button onclick="login()">Entrar</button>
     <div class="footer">
         <p>Não tem uma conta? <a href="#">Crie uma aqui</a></p>
     </div>
+</div>
+
+<div class="footer-message">
+    Desenvolvido por EquipeX &copy; - 2024
 </div>
 
 <script>
@@ -105,9 +131,3 @@
 
 </body>
 </html>
-
-
- <!-- jbDPUIVCBPSyudbv8yureg87ubejpsdfpufbvipfbvjipbfpijvbfipfbvhdfbv
- -->
-
-
