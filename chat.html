@@ -163,19 +163,46 @@
         width: 100%;            
         bottom: 10px; 
     }
-
-    @media (max-width: 600px) {
-        .container {
-            width: 95%;
+    
+        .popup {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
 
-        h1 {
-            font-size: 2rem;
+        .popup-content {
+            background-color: white;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
         }
 
-        .message-box {
-            height: 50%;
+        .close {
+            cursor: pointer;
+            float: right;
         }
+
+       @media (max-width: 600px) {
+       .container {
+           width: 95%;
+       }
+
+       h1 {
+           font-size: 2rem;
+       }
+
+       .message-box {
+           height: 50%;
+       }
+
     }
 
 </style>
@@ -212,6 +239,14 @@
     
     <div id="error-message" style="color: red; margin-top: 10px;"></div> 
 </div>
+    
+    <!-- Aqui vai o popup -->
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="fecharPopup()">&times;</span>
+            <p id="popup-message"></p>
+        </div>
+    </div>
 
 <footer>
     <div class="footer-message">
@@ -223,36 +258,51 @@
 
 <script>
 
-        // Redireciona para login se o usuário não estiver logado
-        if (!localStorage.getItem("username")) {
-            window.location.href = "login.html"; 
-        }
-// socket real para teste local
-// o link abaixo voce pega do replit e cola.
-const socket = io("https://ba0c405b-4223-49e6-858a-3a455b0fda78-00-3dgjzywtmf2h9.riker.replit.dev:3000/"); 
+    // Redireciona para login se o usuário não estiver logado
+    if (!localStorage.getItem("username")) {
+        window.location.href = "login.html"; 
+    }
+    
+    // Socket real para teste local *****
+    // o link abaixo voce cola aqui:
+    const socket = io("https://ba0c405b-4223-49e6-858a-3a455b0fda78-00-3dgjzywtmf2h9.riker.replit.dev:3000/"); 
 
-// pode mudar
-//const socket = io("https://stunning-xylophone-97655qw5x44xcxj6x-3000.app.github.dev/"); 
+    // Pode mudar
+    //const socket = io("https://stunning-xylophone-97655qw5x44xcxj6x-3000.app.github.dev/"); 
     
-    const username = localStorage.getItem("username") || "Usuário Anônimo";
-    
-    let usuariosOnline = 0;  // Contador de usuários online
-     
-        socket.on("connect", () => {
-            console.log("Usuário conectado");
-            usuariosOnline++;
-            atualizarContagemOnline();
-            
+  
+        const username = localStorage.getItem("username") || "Usuário Anônimo";
+
+        let usuariosOnline = 0;  // Contador de usuários online
+
+        socket.on('userStatus', (statusMessage) => {
+            mostrarPopup(statusMessage); // Mostra o pop-up com a mensagem
         });
+
+       socket.on("connect", () => {
+           console.log("Usuário conectado");
+           usuariosOnline++;
+           atualizarContagemOnline();
+           // Emitir a mensagem de status para o servidor
+           socket.emit('setUsername', username); // Mudei para 'setUsername'
+       });
 
         socket.on("disconnect", () => {
             console.log("Usuário desconectado");
             usuariosOnline--;
             atualizarContagemOnline();
-         });
-    
-            // Substitua a função anterior por essa
-            socket.on("message", (msg) => {
+            // Emitir a mensagem de status para o servidor
+            socket.emit('userStatus', `${username} saiu do chat.`);
+        });
+
+        // Nova linha para atualizar a contagem de usuários online
+        socket.on("usuariosOnline", (count) => {
+            usuariosOnline = count;
+            atualizarContagemOnline();
+        });
+
+        // Substitua a função anterior por essa
+        socket.on("message", (msg) => {
             console.log(msg);
             const ul = document.querySelector("ul");
 
@@ -296,15 +346,30 @@ const socket = io("https://ba0c405b-4223-49e6-858a-3a455b0fda78-00-3dgjzywtmf2h9
             alert("Você saiu."); 
             window.location.href = "login.html"; 
         }
-    
+
         // Atualiza contagem de usuarios on line
         function atualizarContagemOnline() {
-           document.getElementById('online').textContent = usuariosOnline;
+            document.getElementById('online').textContent = usuariosOnline;
         }
+
+        // Popup
+        function mostrarPopup(mensagem) {
+            document.getElementById('popup-message').textContent = mensagem;
+            document.getElementById('popup').style.display = 'flex';
+
+            // Fechar o popup automaticamente após 3 segundos
+            setTimeout(fecharPopup, 3000);
+        }
+
+        function fecharPopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+
     
 </script>
 </body>
-
+*/
         
 
 
