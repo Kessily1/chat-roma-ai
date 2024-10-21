@@ -27,7 +27,7 @@
         background-color: #f1f1f1;
         padding: 30px;
         border-radius: 15px;
-        width: 300;
+        width: 280;
         height: 350px;
         box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
         text-align: center;
@@ -108,6 +108,13 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;        
+    }
+
+    section {
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     input[type="text"] {
@@ -193,9 +200,16 @@
         <button onclick="enviar()">Enviar</button>
          <button onclick="logout()">Sair</button>
     </div>
-    <div>
-        <p >Usuários On-Line: <b id="online">0</b></p>
-    </div>
+    
+    <section>
+        <div>
+            <p >Usuários On-Line: <b id="online">0</b></p>
+        </div>
+        <div>
+        <img src="https://img.icons8.com/?size=100&id=RiQFWoQQ4lQE&format=png&color=000000" alt="Ícone de Usuário" width="80">
+        </div>
+    </section>
+    
     <div id="error-message" style="color: red; margin-top: 10px;"></div> 
 </div>
 
@@ -282,7 +296,8 @@ const socket = io("https://ba0c405b-4223-49e6-858a-3a455b0fda78-00-3dgjzywtmf2h9
             alert("Você saiu."); 
             window.location.href = "login.html"; 
         }
-
+    
+        // Atualiza contagem de usuarios on line
         function atualizarContagemOnline() {
            document.getElementById('online').textContent = usuariosOnline;
         }
