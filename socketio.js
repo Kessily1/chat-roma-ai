@@ -7,6 +7,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+require('dotenv').config();
+const openApiKey = process.env.OPENAI_API_KEY;
+
 let usuariosOnline = 0; // Contador de usuários online
 let usuarios = {}; // Armazena os nomes dos usuários conectados
 
