@@ -1,7 +1,7 @@
 //const socket = io("SEU LINK");
 
 //LINK DO MEU CODESPACE
-const socket = io("https://literate-space-computing-machine-g45g7999w57jf96v7-3000.app.github.dev/");
+const socket = io("https://legendary-fiesta-97655qw5xgprhxwr4-3000.app.github.dev/");
 
 if (!localStorage.getItem("username")) {
     window.location.href = "login.html"; 
