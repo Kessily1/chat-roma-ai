@@ -13,9 +13,11 @@ chat-socketio.html
 
  4. Enviar a mensagem ao apertar enter OK - KAIO
 
-   5.  Não enviar mensagem se o campo estiver vazio. OK - GILVAN
+ 5. Não enviar mensagem se o campo estiver vazio. OK - GILVAN
 
  6. ADICIONAR BOTÃI LOGOUT OK - LEO
+
+ 7. Organizando arquivos OK - LEO
 
 
 
