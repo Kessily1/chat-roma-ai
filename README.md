@@ -37,3 +37,5 @@ o que é token ou variável de ambiente?
 4. Integração da Rota de Imagem OK - KÉSSILY
 
 5. Modificação de Layout OK - Eduardo
+
+6. Teste interface gráfica e caixas de texto OK - Gilvan
