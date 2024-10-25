@@ -39,3 +39,5 @@ o que é token ou variável de ambiente?
 5. Modificação de Layout OK - Eduardo
 
 6. Teste interface gráfica e caixas de texto OK - Gilvan
+
+7. Ajudei a integração das Rotas de chat e imagem OK - Kaio
