@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-sktio": "node socketio.js"
+    "start-sktio": "node socketio.js",
+    "dev": "nodemon socketio.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "npm": "^10.9.0",
     "socket.io": "^4.8.0",
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
