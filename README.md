@@ -5,17 +5,17 @@ testando
 ENTREGA DA SEMANA 18/10/24
 chat-socketio.html
 
-1. Implementar uma tela de login para salvar o nome do usuárto para poder identificar no chat OK - kÉSSILY
+ 1. Implementar uma tela de login para salvar o nome do usuárto para poder identificar no chat OK - kÉSSILY
 
-2. Desenvolver o LAYOUT da tela login e da tela do chat com CSS pode usar Bootstrap, Materialize e etc.. OK EDUARDO
+ 2. Desenvolver o LAYOUT da tela login e da tela do chat com CSS pode usar Bootstrap, Materialize e etc.. OK EDUARDO
 
-3. Tratar as mensagens de usuários para ficarem dos lados certo, ou seja, do usuário em questão do lado esquerdo e de quem enviou do lado direito OK - KÉSSILY
+ 3. Tratar as mensagens de usuários para ficarem dos lados certo, ou seja, do usuário em questão do lado esquerdo e de quem enviou do lado direito OK - KÉSSILY
 
-4. Enviar a mensagem ao apertar enter OK - KAIO
+ 4. Enviar a mensagem ao apertar enter OK - KAIO
 
-5 . Não enviar mensagem se o campo estiver vazio. OK - GILVAN
+ 5 . Não enviar mensagem se o campo estiver vazio. OK - GILVAN
 
-6. ADICIONAR BOTÃI LOGOUT OKLEO
+ 6. ADICIONAR BOTÃI LOGOUT OKLEO
 
 
 
