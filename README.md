@@ -26,12 +26,12 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ENTREGA DA SEMANA 25/10/24
 o que é token ou variável de ambiente?
 
-1 Aquisição do Token da API da OpenAI OK - LEO
+1. Aquisição do Token da API da OpenAI OK - LEO
 
 2. Criação de Variáveis de Ambiente OK - kÉSSILY
 
 3. Integração da Rota de Chat para Geração de Texto OK - KESSILY
 
-4.Integração da Rota de Imagem OK - KÉSSILY
+4. Integração da Rota de Imagem OK - KÉSSILY
 
 5. Modificação de Layout OK - Eduardo
