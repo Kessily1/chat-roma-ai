@@ -1,7 +1,7 @@
-//const socket = io("SEU LINK");
-
-//LINK DO MEU CODESPACE
-const socket = io("https://legendary-fiesta-97655qw5xgprhxwr4-3000.app.github.dev/");
+//
+// *** Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
+//
+const socket = io("https://fearful-shadow-v6q69jvq7rggcxx7w-3000.app.github.dev/");
 
 if (!localStorage.getItem("username")) {
     window.location.href = "login.html"; 
@@ -32,12 +32,40 @@ socket.on("usuariosOnline", (count) => {
     atualizarContagemOnline();
 });
 
+// Tratando mensagens aqui:
 socket.on("message", (msg) => {
     const ul = document.querySelector("ul");
     const isCurrentUser = msg.startsWith(`${username}:`);
-    const messageClass = isCurrentUser ? 'sent' : 'received';
-    ul.innerHTML += `<li class="message ${messageClass}">${msg}</li>`;
+    displayMessage(msg, !isCurrentUser);
 });
+
+// Função para exibir mensagens
+function displayMessage(message, isBot = false) {
+    const ul = document.querySelector("ul");
+    
+    // Cria um elemento de mensagem
+    const messageDiv = document.createElement('li');
+    messageDiv.className = isBot ? 'message received' : 'message sent';
+
+    // Adiciona figura do BOT:
+    if (isBot) {
+        const botImage = document.createElement('img');
+        botImage.src = 'https://img.icons8.com/?size=100&id=q7wteb2_yVxu&format=png&color=000000'; 
+        botImage.alt = 'Bot'; 
+        botImage.className = 'bot-image'; 
+        messageDiv.appendChild(botImage); 
+    }
+
+    // Adiciona o conteúdo da mensagem:
+    messageDiv.appendChild(document.createTextNode(message));
+    
+    // Adiciona a mensagem ao chat:
+    ul.appendChild(messageDiv);
+
+    // Rola automaticamente para a última mensagem
+    const messageBox = document.querySelector('.message-box');
+    messageBox.scrollTop = messageBox.scrollHeight; // Rola para baixo
+}
 
 function enviar() {
     const msgInput = document.querySelector("#message-input");
