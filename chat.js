@@ -1,7 +1,7 @@
 //
 // *** Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://fearful-shadow-v6q69jvq7rggcxx7w-3000.app.github.dev/");
+const socket = io("https://petrifying-phantom-v6v7xwqg75q4cxqg6-3000.app.github.dev/");
 
 if (!localStorage.getItem("username")) {
     window.location.href = "login.html"; 
@@ -34,8 +34,13 @@ socket.on("usuariosOnline", (count) => {
 
 // Tratando mensagens aqui:
 socket.on("message", (msg) => {
-    const ul = document.querySelector("ul");
-    const isCurrentUser = msg.startsWith(`${username}:`);
+    console.log('msg chega', msg)
+    let isCurrentUser = ""
+    if(typeof msg != 'string'){
+        isCurrentUser = JSON.stringify(msg).startsWith(`${username}:`);
+    }else{
+        isCurrentUser = msg.startsWith(`${username}:`);
+    }
     displayMessage(msg, !isCurrentUser);
 });
 
@@ -56,8 +61,17 @@ function displayMessage(message, isBot = false) {
         messageDiv.appendChild(botImage); 
     }
 
-    // Adiciona o conteúdo da mensagem:
-    messageDiv.appendChild(document.createTextNode(message));
+// Adiciona o conteúdo da mensagem
+if (typeof message !== 'string') {
+    const img = document.createElement('img'); // Cria um elemento img
+    img.src = message.url; // Define a URL da imagem
+    img.alt = 'Imagem gerada pela OpenAI'; // Define o texto alternativo
+    img.width = 100; // Define a largura da imagem
+
+    messageDiv.appendChild(img); // Adiciona a imagem ao messageDiv
+} else {
+    messageDiv.appendChild(document.createTextNode(message)); // Adiciona texto caso não seja uma imagem
+}
     
     // Adiciona a mensagem ao chat:
     ul.appendChild(messageDiv);
