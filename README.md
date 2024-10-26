@@ -32,12 +32,12 @@ o que é token ou variável de ambiente?
 
 2. Criação de Variáveis de Ambiente OK - kÉSSILY
 
-3. Integração da Rota de Chat para Geração de Texto OK - KESSILY
+3. Integração da Rota de Chat para Geração de Texto OK - KESSILY / Kaio
 
-4. Integração da Rota de Imagem OK - KÉSSILY
+4. Integração da Rota de Imagem OK - KÉSSILY / kaio
 
 5. Modificação de Layout OK - Eduardo
 
 6. Teste interface gráfica e caixas de texto OK - Gilvan
 
-7. Ajudei a integração das Rotas de chat e imagem OK - Kaio
+
