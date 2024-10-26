@@ -55,17 +55,42 @@ io.on('connection', (socket) => {
         io.emit('userStatus', `${user} entrou no chat`); // Notifica todos sobre a entrada
     });
 
-    socket.on('message', async (msg) => { // Torna a função assíncrona
+    socket.on('message', async (msg) => {
         console.log('Mensagem recebida:', msg); // Log da mensagem recebida
         io.emit('message', msg); // Envia a mensagem para todos
-
-        // Chama a API da OpenAI para gerar uma resposta
-        const response = await generateOpenAIResponse(msg);
-        console.log('Resposta gerada pela OpenAI:', response); // Log da resposta gerada
-        if (response) {
-            io.emit('message', response); // Envia a resposta gerada para todos
+    
+        // Extrai a parte da mensagem após o primeiro ':' e remove espaços em branco
+        const content = msg.split(':').slice(1).join(':').trim();
+    
+        // Verifica se a mensagem começa com '/text' para gerar uma resposta de texto
+        if (content.startsWith('/text')) {
+            // Remove o comando '/text' para que apenas o texto desejado seja enviado para a API
+            const userMessage = content.slice(5).trim();
+    
+            // Chama a API da OpenAI para gerar uma resposta
+            const response = await generateOpenAIResponse(userMessage);
+            console.log('Resposta gerada pela OpenAI:', response); // Log da resposta gerada
+    
+            if (response) {
+                io.emit('message', response); // Envia a resposta gerada para todos
+            }
+        }
+    
+        // Verifica se a mensagem começa com '/image' para gerar uma imagem
+        else if (content.startsWith('/image')) {
+            // Remove o comando '/image' para que apenas a descrição desejada seja enviada para a API
+            const imagePrompt = content.slice(6).trim();
+    
+            // Chama a API da OpenAI para gerar uma imagem
+            const imageUrl = await generateOpenAIImage(imagePrompt);
+            console.log('Imagem gerada pela OpenAI:', imageUrl); // Log do URL da imagem gerada
+    
+            if (imageUrl) {
+                io.emit('message', { type: 'image', url: imageUrl }); // Envia o URL da imagem para todos
+            }
         }
     });
+    
     
     
     
@@ -104,6 +129,29 @@ async function generateOpenAIResponse(message) {
         return 'Desculpe, não consegui entender sua mensagem.'; // Mensagem padrão em caso de erro
     }
 } 
+
+async function generateOpenAIImage(prompt) {
+    console.log('Chamando a API da OpenAI para gerar uma imagem com o prompt:', prompt);
+    try {
+        const response = await axios.post('https://api.openai.com/v1/images/generations', {
+            prompt: prompt,
+            n: 1, // Número de imagens a serem geradas
+            size: '1024x1024', // Tamanho da imagem
+        }, {
+            headers: {
+                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log('Resposta da API (imagem):', response.data); // Loga a resposta da API
+        return response.data.data[0].url; // Retorna o URL da imagem
+    } catch (error) {
+        console.error('Erro ao chamar a API da OpenAI para imagem:', error.response ? error.response.data : error.message);
+        return 'Desculpe, não consegui gerar a imagem solicitada.'; // Mensagem padrão em caso de erro
+    }
+}
+
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/chat.html");
