@@ -16,7 +16,7 @@ let usuarios = {};
 
 // Definição do Middleware do Express:
 app.use(express.static(__dirname)); // Configura o Express para servir arquivos estáticos a partir o diretório atual
-app.use(express.json()); // Configura o Express para reconhecer e analisar o corpo das requisições HTTP que estão no formato JSON.
+app.use(express.json());            // Configura o Express para reconhecer e analisar o corpo das requisições HTTP que estão no formato JSON.
 
 
 // Rota para integração com a API da OpenAI (respostas de texto):
@@ -60,9 +60,9 @@ io.on('connection', (socket) => {
     //Tratamento de mensagem recebida:
     socket.on('message', async (msg) => {
         console.log('Mensagem recebida:', msg); 
-        io.emit('message', msg); // Envia a mensagem para todos os usuários
+        io.emit('message', msg);    // Envia a mensagem para todos os usuários
         
-        // Extrai o nome de usuário e a mensagem separadamente
+        // Extrai o nome de usuário e a mensagem separadamente:
         const splitMsg = msg.split(':');
         if (splitMsg.length < 2) {
             io.emit('message', 'Ops! Mensagem inválida.');
@@ -88,6 +88,7 @@ io.on('connection', (socket) => {
                         io.emit('message', 'Chat Bot: Ops! Comando /text detectado, mas nenhuma mensagem foi encontrada após o comando. Digite algo após /text para obter uma resposta.');
                     }              
          } 
+         
         // Verificação de mensagem do usuário se começa com /image:
         if (commandMsg.toLowerCase().startsWith('/image')) {
             const imageDescription = commandMsg.slice(7).trim();

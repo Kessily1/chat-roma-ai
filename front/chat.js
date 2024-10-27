@@ -108,7 +108,7 @@ document.querySelector("#message-input").addEventListener("keypress", (event) =>
     }
 });
 
-// Função para logout
+// Função para logout:
 function logout() {
     localStorage.removeItem("username"); 
     alert("Você saiu."); 
