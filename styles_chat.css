@@ -1,7 +1,7 @@
 body {
     background-color: #a5a5a7;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #333; 
+    color: #6d6c6c; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -18,16 +18,19 @@ h1 {
 }
 
 .icon {
+    display: flex;
     text-align: center;
-    margin-bottom: 10px; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    gap: 15px; 
 }
 
 .container {
     background-color: #f1f1f1;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
-    width: 380px;  /* Aumenta a largura da janela */
-    height: 430px; /* Aumenta a altura da janela */
+    width: 280;
+    height: 350px;
     box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     border: 1px solid #b0b0b0;
@@ -43,9 +46,9 @@ h1 {
     padding: 10px;  
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
     width: 100%; 
-    height: 75%;  
+    height: 80%;
     overflow-y: scroll;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border: 2px solid #2c3e50; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -55,8 +58,7 @@ h1 {
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Outros estilos permanecem inalterados */
-
+/* Adiciona flex para alinhar as mensagens à esquerda ou direita */
 ul {
     list-style: none;
     padding: 0;
@@ -69,34 +71,38 @@ ul {
 .message.sent {
     background-color: #d4af37; 
     color: white;
-    text-align: left;
+    text-align: right;
     align-self: flex-end;
     border-radius: 15px 15px 15px 0;
     padding: 10px;
     margin: 2px 0;
-    max-width: 220px; /* Aumenta o limite máximo */
-    overflow-wrap: break-word;
-    font-size: 14px; /* Aumenta o tamanho da fonte */
+    max-width: 70%;
+    word-wrap: break-word;
 }
 
 .message.received {
     background-color: #2c3e50; 
     color: white;
-    text-align: right;
+    text-align: left;
     align-self: flex-start; 
-    border-radius: 15px 15px 0 15px;
+    border-radius: 15px 15px 15 0;
     padding: 10px;
     margin: 2px 0;
-    max-width: 220px; /* Aumenta o limite máximo */
+    max-width: 230px; 
     overflow-wrap: break-word;
-    font-size: 14px; /* Aumenta o tamanho da fonte */
+    font-size: 15px;
 }
 
-.bot-image {
-    width: 30px; 
-    height: auto; 
-    margin-right: 8px; 
-    vertical-align: middle; 
+.message.chatbot {
+    background-color: #0f8d24; 
+    color: white;
+    text-align: center;
+    align-self: center; 
+    border-radius: 15px 15px 15 0;
+    padding: 10px;
+    margin: 2px 0;
+    max-width: 70%;
+    word-wrap: break-word;
 }
 
 .message {
@@ -106,6 +112,12 @@ ul {
     border-radius: 8px;
     word-wrap: break-word;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.received-image {
+    max-width: 100%; 
+    height: auto;    
+    margin-top: 5px; 
 }
 
 #chat-form {
@@ -156,14 +168,14 @@ button:hover {
 
 .footer {
     margin-top: 20px;
-    font-size: 15px;
+    /*font-size: 15px;*/
     color: #2c3e50; 
 }
 
 .footer-message {
     margin-top: 15px;
     text-align: center;
-    font-size: 10px; 
+    font-size: 12px; 
     color: #2c3e50; 
     width: 100%;            
     bottom: 10px; 

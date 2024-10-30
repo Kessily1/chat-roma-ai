@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles_login.css">
+    <link rel="stylesheet" href="../styles_login.css">
     <title>Login</title>
     
 </head>
@@ -29,6 +29,7 @@
 </footer>
 
 <script>
+    // Manipulando dados locais:
     function login() {
         const username = document.getElementById("username").value.trim();
         if (username) {
@@ -38,6 +39,14 @@
             alert("Por favor, digite um nome."); 
         }
     }
+
+    // Adiciona evento para capturar o Enter:
+    document.getElementById("username").addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            login();
+            event.preventDefault();
+        }
+    });
 </script>
 
 </body>
