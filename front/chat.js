@@ -1,6 +1,6 @@
 // * Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://terrible-spell-q7p7j5qpg5vjf95jj-3000.app.github.dev/");
+const socket = io("https://neglected-crematorium-pjpj45rpqwj7c9gw-3000.app.github.dev/");
 //
 //
 
