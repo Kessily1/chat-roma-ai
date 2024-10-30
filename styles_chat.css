@@ -101,8 +101,16 @@ ul {
     border-radius: 15px 15px 15 0;
     padding: 10px;
     margin: 2px 0;
-    max-width: 70%;
-    word-wrap: break-word;
+    max-width: 320px; 
+    overflow-wrap: break-word;
+    font-size: 15px;
+}
+
+.bot-image {
+    width: 40px; 
+    height: auto; 
+    margin-right: 8px; 
+    vertical-align: middle; 
 }
 
 .message {
