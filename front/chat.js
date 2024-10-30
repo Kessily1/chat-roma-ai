@@ -1,6 +1,6 @@
 // * Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://gloomy-crypt-r45rv545jw6hwjxp-3000.app.github.dev/");
+const socket = io("https://damp-casket-7vrgpqqq44r9cx5g9-3000.app.github.dev/");
 //
 //
 
