@@ -34,5 +34,6 @@ Esta branch contém os arquivos base do projeto Chat-Roma-Ai.
 ### Semana 01/11/24
 1. Integrar APIs Públicas ao projeto - IMAGEM DE GATO. CACHORRO, RAPOSA, USUARIO - LEO
 2. Inserção de SONS no projeto do chat - EDUARDO
+3. teste - GILVAN
 
 
