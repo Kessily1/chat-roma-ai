@@ -1,6 +1,6 @@
 // * Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://possessed-incantation-x59jv666q9x53pp5w-3000.app.github.dev/");
+const socket = io("https://shiny-tribble-69xr7x9xjv43gp-3000.app.github.dev/");
 //
 //
 
@@ -67,9 +67,9 @@ socket.on("disconnect", () => {
     const urlRegex = /(https?:\/\/[^\s]+)/g; // Regex para identificar URLs
     if (urlRegex.test(message)) {
         const img = document.createElement('img');
-        img.src = message.match(urlRegex)[0]; // Pega a primeira URL encontrada
+        img.src = message.match(urlRegex)[0]; 
         img.alt = 'Imagem recebida';
-        img.className = 'received-image'; // Classe CSS para estilizar a imagem
+        img.className = 'received-image'; 
         messageDiv.appendChild(img);
     } else {
         // Adiciona o conteúdo da mensagem

@@ -47,31 +47,34 @@ async function generateOpenAIResponse(message) {
     }
 }
 
-// Função para buscar uma imagem de gato 
+//
+// Funções de magens aleatórias a partir de texto simples: "miau","auau","raposa" e "usuário"
+//
+// miau - Função para buscar uma imagem de gato 
 async function fetchCatImage() {
     const response = await axios.get('https://api.thecatapi.com/v1/images/search');
     return response.data[0].url; // Retorna a URL da imagem do gato
 }
 
-// Função para buscar uma imagem de raposa 
+// raposa - Função para buscar uma imagem de raposa 
 async function fetchFoxImage() {
     const response = await axios.get('https://randomfox.ca/floof/');
     return response.data.image; // Retorna a URL da imagem da raposa
 }
 
-// Função para buscar uma imagem de cachorro 
+// auau - Função para buscar uma imagem de cachorro 
 async function fetchDogImage() {
     const response = await axios.get('https://random.dog/woof.json');
     return response.data.url; // Retorna a URL da imagem do cachorro
 }
 
-// Função para buscar uma imagem de usuário
+// usuário - Função para buscar uma imagem de usuário
 async function fetchUserImage() {
     const response = await axios.get('https://randomuser.me/api/');
     return response.data.results[0].picture.large; // Retorna a URL da imagem do usuário
 }
 
-// Função para chamar a API da OpenAI para imagens
+// Função para chamar a API da OpenAI para imagens:
 async function generateOpenAIImage(description) {
     console.log('Chamando a API da OpenAI para gerar imagem com a descrição:', description);
     try {
@@ -92,11 +95,11 @@ async function generateOpenAIImage(description) {
     }
 }
 
-// Conectando usuário ao Servidor
+// Conectando usuário ao Servidor:
 io.on('connection', (socket) => {
     console.log('Usuário conectado: ' + socket.id);
     
-    // Configuração de nome de usuário
+    // Configuração de nome de usuário:
     socket.on('setUsername', (user) => {
         if (!user || Object.values(usuarios).includes(user)) {
             socket.emit('userStatus', 'Eita! Nome de usuário inválido ou já em uso.');
@@ -108,12 +111,12 @@ io.on('connection', (socket) => {
         io.emit('userStatus', `${user} entrou no chat`);
     });
 
-    // Tratamento de mensagem recebida
+    // Tratamento de mensagem recebida:
     socket.on('message', async (msg) => {
         console.log('Mensagem recebida:', msg); 
         io.emit('message', msg); // Envia a mensagem para todos os usuários
 
-        // Extrai o nome de usuário e a mensagem separadamente
+        // Extrai o nome de usuário e a mensagem separadamente:
         const splitMsg = msg.split(':');
         if (splitMsg.length < 2) {
             io.emit('message', 'Ops! Mensagem inválida.');
@@ -122,12 +125,12 @@ io.on('connection', (socket) => {
         
         const commandMsg = splitMsg.slice(1).join(':').trim(); // Mensagem após o ":"
         
-        // Verificação se a mensagem começa com /text
+        // Verificação se a mensagem começa com /text:
         if (commandMsg.toLowerCase().startsWith('/text')) {          
             const userMessage = commandMsg.slice(6).trim(); 
             console.log('Comando /text detectado. Conteúdo da mensagem:', userMessage);
              
-            //Verifica se a mensagem não está vazia.
+            //Verifica se a mensagem não está vazia:
             if (userMessage) {
                 try {
                     const response = await generateOpenAIResponse(userMessage);
@@ -141,7 +144,7 @@ io.on('connection', (socket) => {
             }              
         } 
         
-        // Verificação se a mensagem começa com /image
+        // Verificação se a mensagem começa com /image:
         if (commandMsg.toLowerCase().startsWith('/image')) {
             const imageDescription = commandMsg.slice(7).trim();
             console.log('Comando /image detectado. Descrição da imagem:', imageDescription);
@@ -160,48 +163,54 @@ io.on('connection', (socket) => {
             }
         }
 
-        // Verificação se a mensagem é "miau"
+        // Verificação se a mensagem é "miau":
         if (commandMsg && commandMsg.toLowerCase() === 'miau') {
             try {
-                const catImageUrl = await fetchCatImage(); // Busca imagem de gato
-                io.emit('message', `Chat Bot: Aqui está sua imagem de gato!`);
-                io.emit('message', catImageUrl); // Envia a URL da imagem
+                const catImageUrl = await fetchCatImage(); // Chamada de funçao do Gato
+                io.emit('message', 'Chat Bot: Miau ? isso é coisa de gato... Achei um...');
+                io.emit('message', `Chat Bot: ${catImageUrl}`);
+                
+
             } catch (error) {
                 console.error('Erro ao enviar imagem de gato:', error);
                 io.emit('message', 'Chat Bot: Ops! Não consegui encontrar uma imagem de gato.');
             }
         }
 
-        // Verificação se a mensagem é "raposa"
+        // Verificação se a mensagem é "raposa":
         if (commandMsg && commandMsg.toLowerCase() === 'raposa') {
             try {
-                const foxImageUrl = await fetchFoxImage(); // Busca imagem de raposa
-                io.emit('message', `Chat Bot: Aqui está sua imagem de raposa!`);
-                io.emit('message', foxImageUrl); // Envia a URL da imagem
+                const foxImageUrl = await fetchFoxImage(); // Chamada de função da Raposa
+                io.emit('message', 'Chat Bot: Raposa ? Vou procura uma pra você...');
+                io.emit('message', `Chat Bot: ${foxImageUrl}`);
+                
+
             } catch (error) {
                 console.error('Erro ao enviar imagem de raposa:', error);
                 io.emit('message', 'Chat Bot: Ops! Não consegui encontrar uma imagem de raposa.');
             }
         }
 
-        // Verificação se a mensagem é "auau"
+        // Verificação se a mensagem é "auau":
         if (commandMsg && commandMsg.toLowerCase() === 'auau') {
             try {
-                const dogImageUrl = await fetchDogImage(); // Busca imagem de cachorro
-                io.emit('message', `Chat Bot: Aqui está sua imagem de cachorro!`);
-                io.emit('message', dogImageUrl); // Envia a URL da imagem
+                const dogImageUrl = await fetchDogImage(); // Chamada de função do Cachorro
+                io.emit('message', 'Chat Bot: Auau ? isso é coisa de cachorro... Vou chamar...');
+                io.emit('message', `Chat Bot: ${dogImageUrl}`); 
+
             } catch (error) {
                 console.error('Erro ao enviar imagem de cachorro:', error);
                 io.emit('message', 'Chat Bot: Ops! Não consegui encontrar uma imagem de cachorro.');
             }
         }
 
-        // Verificação se a mensagem é "usuario"
+        // Verificação se a mensagem é "usuario":
         if (commandMsg && commandMsg.toLowerCase() === 'usuario') {
             try {
-                const userImageUrl = await fetchUserImage(); // Busca imagem de usuário
-                io.emit('message', `Chat Bot: Aqui está sua imagem de usuário!`);
-                io.emit('message', userImageUrl); // Envia a URL da imagem
+                const userImageUrl = await fetchUserImage(); // Chamada de função da foto do Usuário
+                io.emit('message', `Chat Bot: Tome uma foto de usuário comum....`);
+                io.emit('message', `Chat Bot: ${userImageUrl}`);
+
             } catch (error) {
                 console.error('Erro ao enviar imagem de usuário:', error);
                 io.emit('message', 'Chat Bot: Ops! Não consegui encontrar uma imagem de usuário.');
@@ -209,7 +218,7 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Desconectando usuário do Servidor
+    // Desconectando usuário do Servidor:
     socket.on('disconnect', () => {
         const user = usuarios[socket.id];
         console.log('Usuário desconectado: ' + socket.id);
