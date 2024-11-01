@@ -1,39 +1,35 @@
-Esta branch contem os aquivos base do projeto Chat-Roma-Ai
-testando
+#
+# Projeto Chat-Roma-Ai
+#
+
+Esta branch contém os arquivos base do projeto Chat-Roma-Ai.
+
+## Entregas
+
+### Semana 18/10/24
+
+1. Implementar uma tela de login para salvar o nome do usuário e poder identificar no chat. **(OK - KÉSSILY)**
+2. Desenvolver o layout da tela de login e da tela do chat com CSS, podendo usar Bootstrap, Materialize, etc. **(OK - EDUARDO)**
+3. Tratar as mensagens dos usuários para ficarem dos lados corretos: do usuário à esquerda e de quem enviou à direita. **(OK - KÉSSILY)**
+4. Enviar a mensagem ao apertar Enter. **(OK - KAIO)**
+5. Não enviar mensagem se o campo estiver vazio. **(OK - GILVAN)**
+6. Adicionar botão de logout. **(OK - LEO)**
+7. Organizar arquivos. **(OK - LEO)**
+
+---
+
+### Semana 25/10/24
+
+**O que é token ou variável de ambiente?**
+
+1. Aquisição do token da API da OpenAI. **(OK - LEO)**
+2. Criação de variáveis de ambiente. **(OK - KÉSSILY)**
+3. Integração da rota de chat para geração de texto. **(OK - KESSILY)**
+4. Integração da rota de imagem. **(OK - KÉSSILY)**
+5. Modificação de layout. **(OK - EDUARDO)**
+
+---
 
 
-ENTREGA DA SEMANA 18/10/24
-chat-socketio.html
-
- 1. Implementar uma tela de login para salvar o nome do usuárto para poder identificar no chat OK - kÉSSILY
-
- 2. Desenvolver o LAYOUT da tela login e da tela do chat com CSS pode usar Bootstrap, Materialize e etc.. OK - EDUARDO
-
- 3. Tratar as mensagens de usuários para ficarem dos lados certo, ou seja, do usuário em questão do lado esquerdo e de quem enviou do lado direito OK - KÉSSILY
-
- 4. Enviar a mensagem ao apertar enter OK - KAIO
-
- 5. Não enviar mensagem se o campo estiver vazio. OK - GILVAN
-
- 6. ADICIONAR BOTÃI LOGOUT OK - LEO
-
- 7. Organizando arquivos OK - LEO
 
 
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-
-ENTREGA DA SEMANA 25/10/24
-o que é token ou variável de ambiente?
-
-1. Aquisição do Token da API da OpenAI OK - LEO
-
-2. Criação de Variáveis de Ambiente OK - kÉSSILY
-
-3. Integração da Rota de Chat para Geração de Texto OK - KESSILY
-
-4. Integração da Rota de Imagem OK - KÉSSILY
-
-5. Modificação de Layout OK - Eduardo
