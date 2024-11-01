@@ -12,13 +12,17 @@ const username = localStorage.getItem("username") || "Usuário Anônimo";
 let usuariosOnline = 0;
 
 // Eventos do socket
+
+// Apresentação de Popup:
 socket.on('userStatus', mostrarPopup);
 
+// Usuarios On Line:
 socket.on("usuariosOnline", (count) => {
     usuariosOnline = count;
     atualizarContagemOnline();
 });
 
+// Evento de conexão
 socket.on("connect", () => {
     console.log("Usuário conectado");
     usuariosOnline++;
@@ -26,6 +30,17 @@ socket.on("connect", () => {
     socket.emit('setUsername', username);
     document.getElementById("meuNomeUsuario").textContent = username;
 });
+
+// Tocar os audios aqui:
+socket.on('playAudio', (audioPath) => {
+    const audio = document.getElementById('notificationSound');
+    audio.src = audioPath; 
+    console.log("caminho do audio:",audioPath);
+    audio.play()
+        .catch((error) => {
+            console.error('Erro ao tentar reproduzir o áudio:', error);
+        });
+    });
 
 socket.on("disconnect", () => {
     console.log("Usuário desconectado");
@@ -110,6 +125,7 @@ document.querySelector("#message-input").addEventListener("keypress", (event) =>
 
 // Função para logout:
 function logout() {
+    socket.disconnect();
     localStorage.removeItem("username"); 
     alert("Você saiu."); 
     window.location.href = "/front/login.html"; 

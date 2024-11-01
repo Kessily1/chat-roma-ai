@@ -48,7 +48,7 @@ async function generateOpenAIResponse(message) {
 }
 
 //
-// Funções de magens aleatórias a partir de texto simples: "miau","auau","raposa" e "usuário"
+// Funções de imagens aleatórias a partir de texto simples: "miau","auau","raposa" e "usuário"
 //
 // miau - Função para buscar uma imagem de gato 
 async function fetchCatImage() {
@@ -96,9 +96,13 @@ async function generateOpenAIImage(description) {
 }
 
 // Conectando usuário ao Servidor:
-io.on('connection', (socket) => {
-    console.log('Usuário conectado: ' + socket.id);
-    
+
+    // Emite audio no login:
+    io.on('connection', (socket) => {
+        console.log('Usuário conectado: ' + socket.id); // <- informa usuario conectado
+        const login_audio = '../audio/easychatlogin.mp3'; // <- toca arquivo mp3
+        socket.emit('playAudio', login_audio);    
+
     // Configuração de nome de usuário:
     socket.on('setUsername', (user) => {
         if (!user || Object.values(usuarios).includes(user)) {
@@ -106,15 +110,18 @@ io.on('connection', (socket) => {
             return;
         }
         usuarios[socket.id] = user;
-        usuariosOnline++;
+        usuariosOnline++;   
         io.emit('usuariosOnline', usuariosOnline);
-        io.emit('userStatus', `${user} entrou no chat`);
+        io.emit('userStatus', `${user} entrou no chat`);    
     });
+  
 
     // Tratamento de mensagem recebida:
     socket.on('message', async (msg) => {
+        const newMessageAudio = '../audio/newmessage.mp3'; // <<--- caminho relativo do audio
         console.log('Mensagem recebida:', msg); 
-        io.emit('message', msg); // Envia a mensagem para todos os usuários
+        io.emit('message', msg); 
+        socket.emit('playAudio',newMessageAudio); // <<<<---- chama o audio
 
         // Extrai o nome de usuário e a mensagem separadamente:
         const splitMsg = msg.split(':');
@@ -218,7 +225,6 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Desconectando usuário do Servidor:
     socket.on('disconnect', () => {
         const user = usuarios[socket.id];
         console.log('Usuário desconectado: ' + socket.id);
@@ -229,6 +235,9 @@ io.on('connection', (socket) => {
             io.emit('userStatus', `${user} saiu do chat`);
         }
     });
+
+
+
 });
 
 // Inicia o servidor
