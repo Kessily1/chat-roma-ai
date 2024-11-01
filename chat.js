@@ -1,7 +1,8 @@
 //
 // *** Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://fearful-shadow-v6q69jvq7rggcxx7w-3000.app.github.dev/");
+const socket = io("https://haunted-mummy-97j7rg9j4xggc79j9-3000.app.github.dev/
+    ");
 
 if (!localStorage.getItem("username")) {
     window.location.href = "login.html"; 
