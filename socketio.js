@@ -131,7 +131,8 @@ async function generateOpenAIImage(description) {
         }
         
         const commandMsg = splitMsg.slice(1).join(':').trim(); // Mensagem após o ":"
-        
+        const audioErro = '../audio/risoErro.wav';
+
         // Verificação se a mensagem começa com /text:
         if (commandMsg.toLowerCase().startsWith('/text')) {          
             const userMessage = commandMsg.slice(6).trim(); 
@@ -145,9 +146,11 @@ async function generateOpenAIImage(description) {
                 } catch (error) {
                     console.error('Erro ao gerar resposta:', error);
                     io.emit('message', 'Chat Bot: Ops! Erro ao gerar a resposta.');
+                    io.emit('playAudio',audioErro);
                 }
             } else {
                 io.emit('message', 'Chat Bot: Ops! Comando /text detectado, mas nenhuma mensagem foi encontrada após o comando. Digite algo após /text para obter uma resposta.');
+                io.emit('playAudio',audioErro);
             }              
         } 
         
@@ -164,20 +167,23 @@ async function generateOpenAIImage(description) {
                 } catch (error) {
                     console.error('Erro ao gerar imagem:', error);
                     io.emit('message', 'Chat Bot: Ops! Houve um erro ao gerar a imagem.');
+                    io.emit('playAudio',audioErro);
                 }
             } else {
                 io.emit('message', 'Chat Bot: Ops! Comando /image detectado, mas nenhuma descrição foi encontrada. Digite uma descrição após /image para gerar uma imagem.');
+                io.emit('playAudio',audioErro);
             }
         }
 
         // Verificação se a mensagem é "miau":
         if (commandMsg && commandMsg.toLowerCase() === 'miau') {
             try {
-                const catImageUrl = await fetchCatImage(); // Chamada de funçao do Gato
-                io.emit('message', 'Chat Bot: Miau ? isso é coisa de gato... Achei um...');
+                const somGato = '../audio/somGatoMiau.wav';     // <-- Caminho pro som do gato
+                const catImageUrl = await fetchCatImage();      // Chama função imagem do gato
+                io.emit('message', 'Chat Bot: Miau ? isso é coisa de gato... Achei um...');               
                 io.emit('message', `Chat Bot: ${catImageUrl}`);
+                io.emit('playAudio', somGato);
                 
-
             } catch (error) {
                 console.error('Erro ao enviar imagem de gato:', error);
                 io.emit('message', 'Chat Bot: Ops! Não consegui encontrar uma imagem de gato.');
@@ -187,10 +193,9 @@ async function generateOpenAIImage(description) {
         // Verificação se a mensagem é "raposa":
         if (commandMsg && commandMsg.toLowerCase() === 'raposa') {
             try {
-                const foxImageUrl = await fetchFoxImage(); // Chamada de função da Raposa
+                const foxImageUrl = await fetchFoxImage();  // Chamada de função imagem da Raposa
                 io.emit('message', 'Chat Bot: Raposa ? Vou procura uma pra você...');
                 io.emit('message', `Chat Bot: ${foxImageUrl}`);
-                
 
             } catch (error) {
                 console.error('Erro ao enviar imagem de raposa:', error);
@@ -201,9 +206,11 @@ async function generateOpenAIImage(description) {
         // Verificação se a mensagem é "auau":
         if (commandMsg && commandMsg.toLowerCase() === 'auau') {
             try {
-                const dogImageUrl = await fetchDogImage(); // Chamada de função do Cachorro
+                const somDogAuau = '../audio/somDogAuau.wav';   // <--- Caminho pro som do cachorro
+                const dogImageUrl = await fetchDogImage();      // Chama função imagem do Cachorro
                 io.emit('message', 'Chat Bot: Auau ? isso é coisa de cachorro... Vou chamar...');
-                io.emit('message', `Chat Bot: ${dogImageUrl}`); 
+                io.emit('message', `Chat Bot: ${dogImageUrl}`);
+                io.emit('playAudio', somDogAuau); 
 
             } catch (error) {
                 console.error('Erro ao enviar imagem de cachorro:', error);
@@ -223,6 +230,27 @@ async function generateOpenAIImage(description) {
                 io.emit('message', 'Chat Bot: Ops! Não consegui encontrar uma imagem de usuário.');
             }
         }
+
+        // Verificação de mensagem som de Gato - comando "som de gato"
+        const gato = '../audio/somGato.wav';
+        if (commandMsg && commandMsg.toLowerCase() === 'som de gato'){
+            io.emit('playAudio', gato);
+        }
+
+        // Verificação de mensagem som de Bode - comando "som de bode"
+        const bode = '../audio/somBode.wav';
+        if (commandMsg && commandMsg.toLowerCase() === 'som de bode'){
+            io.emit('playAudio', bode);
+        }
+
+        // Verificação de mensagem Star Wars - comando "Star Wars"
+        const starWars = '../audio/starWarsTheme.mp3';
+        const starWarsImage = '../image/star-wars.jpg';
+        if (commandMsg && commandMsg.toLowerCase() === 'star wars'){
+            io.emit('playAudio', starWars);
+            io.emit('message', `Chat Bot: Que a força esteja com você ...`);
+        }
+
     });
 
     socket.on('disconnect', () => {

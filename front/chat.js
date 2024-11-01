@@ -1,6 +1,6 @@
 // * Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://shiny-tribble-69xr7x9xjv43gp-3000.app.github.dev/");
+const socket = io("https://supreme-funicular-jjqjvp5qw96w35jj4-3000.app.github.dev/");
 //
 //
 
