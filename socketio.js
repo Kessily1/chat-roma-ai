@@ -148,6 +148,7 @@ io.on('connection', (socket) => {
             
             if (imageDescription) {
                 try {
+                    io.emit('message','Chat Bot: Buscando imagem, aguarde ...')
                     const responseUrl = await generateOpenAIImage(imageDescription);
                     io.emit('message', `Chat Bot: Aqui está sua imagem! ${responseUrl}`);
                 } catch (error) {
