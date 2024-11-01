@@ -32,28 +32,10 @@ Esta branch contém os arquivos base do projeto Chat-Roma-Ai.
 
 
 ### Semana 01/11/24
-1: Integrar APIs Públicas ao projeto - IMAGEM DE GATO.
-
-#######################################
-
-2: Integrar APIs Públicas ao projeto - IMAGEM DE CACHORRO.
-
-
-
-#######################################
-
-3: Integrar APIs Públicas ao projeto - IMAGEM DE RAPOSA.
-
-
-
-#######################################
-
-4: Integrar APIs Públicas ao projeto - ESCOLHA UMA OUTRA.
-
-
-
-#######################################
-
-5: Inserção de SONS no projeto do chat
+1. Integrar APIs Públicas ao projeto - IMAGEM DE GATO.
+2. Integrar APIs Públicas ao projeto - IMAGEM DE CACHORRO.
+3. Integrar APIs Públicas ao projeto - IMAGEM DE RAPOSA.
+4. Integrar APIs Públicas ao projeto - ESCOLHA UMA OUTRA.
+5. Inserção de SONS no projeto do chat
 Som de 4 animais diferentes e 4 trechos de áudios de sons clássicos como, trechos de filmes, jogos ou outros conhecidos.
 
