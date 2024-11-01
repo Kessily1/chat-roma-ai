@@ -18,6 +18,35 @@ let usuarios = {};
 app.use(express.static(__dirname)); // Serve arquivos estáticos a partir do diretório atual
 app.use(express.json());            // Reconhece e analisa o corpo das requisições HTTP no formato JSON
 
+// Rota HTTP para o Servidor
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/front/chat.html");
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/front/login.html');
+});
+
+// Função para chamar a API da OpenAI para texto
+async function generateOpenAIResponse(message) {
+    console.log('Chamando a API da OpenAI com a mensagem:', message);
+    try {
+        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: message }],
+        }, {
+            headers: {
+                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data.choices[0].message.content;
+    } catch (error) {
+        console.error('Erro ao chamar a API da OpenAI:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+}
+
 // Função para buscar uma imagem de gato 
 async function fetchCatImage() {
     const response = await axios.get('https://api.thecatapi.com/v1/images/search');
@@ -42,14 +71,26 @@ async function fetchUserImage() {
     return response.data.results[0].picture.large; // Retorna a URL da imagem do usuário
 }
 
-// Rota HTTP para o Servidor
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/front/chat.html");
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/front/login.html');
-});
+// Função para chamar a API da OpenAI para imagens
+async function generateOpenAIImage(description) {
+    console.log('Chamando a API da OpenAI para gerar imagem com a descrição:', description);
+    try {
+        const response = await axios.post('https://api.openai.com/v1/images/generations', {
+            prompt: description,
+            n: 1,
+            size: '1024x1024',
+        }, {
+            headers: {
+                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data.data[0].url;
+    } catch (error) {
+        console.error('Erro ao chamar a API da OpenAI para gerar imagem:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+}
 
 // Conectando usuário ao Servidor
 io.on('connection', (socket) => {
@@ -69,10 +110,55 @@ io.on('connection', (socket) => {
 
     // Tratamento de mensagem recebida
     socket.on('message', async (msg) => {
-        console.log('Mensagem recebida:', msg);
+        console.log('Mensagem recebida:', msg); 
         io.emit('message', msg); // Envia a mensagem para todos os usuários
+
+        // Extrai o nome de usuário e a mensagem separadamente
+        const splitMsg = msg.split(':');
+        if (splitMsg.length < 2) {
+            io.emit('message', 'Ops! Mensagem inválida.');
+            return;
+        }
         
-        const commandMsg = msg.split(':')[1]?.trim(); // Extrai a mensagem após ":"
+        const commandMsg = splitMsg.slice(1).join(':').trim(); // Mensagem após o ":"
+        
+        // Verificação se a mensagem começa com /text
+        if (commandMsg.toLowerCase().startsWith('/text')) {          
+            const userMessage = commandMsg.slice(6).trim(); 
+            console.log('Comando /text detectado. Conteúdo da mensagem:', userMessage);
+             
+            //Verifica se a mensagem não está vazia.
+            if (userMessage) {
+                try {
+                    const response = await generateOpenAIResponse(userMessage);
+                    io.emit('message', `Chat Bot: ${response}`);
+                } catch (error) {
+                    console.error('Erro ao gerar resposta:', error);
+                    io.emit('message', 'Chat Bot: Ops! Erro ao gerar a resposta.');
+                }
+            } else {
+                io.emit('message', 'Chat Bot: Ops! Comando /text detectado, mas nenhuma mensagem foi encontrada após o comando. Digite algo após /text para obter uma resposta.');
+            }              
+        } 
+        
+        // Verificação se a mensagem começa com /image
+        if (commandMsg.toLowerCase().startsWith('/image')) {
+            const imageDescription = commandMsg.slice(7).trim();
+            console.log('Comando /image detectado. Descrição da imagem:', imageDescription);
+            
+            if (imageDescription) {
+                try {
+                    io.emit('message','Chat Bot: Buscando imagem, aguarde ...')
+                    const responseUrl = await generateOpenAIImage(imageDescription);
+                    io.emit('message', `Chat Bot: Aqui está sua imagem! ${responseUrl}`);
+                } catch (error) {
+                    console.error('Erro ao gerar imagem:', error);
+                    io.emit('message', 'Chat Bot: Ops! Houve um erro ao gerar a imagem.');
+                }
+            } else {
+                io.emit('message', 'Chat Bot: Ops! Comando /image detectado, mas nenhuma descrição foi encontrada. Digite uma descrição após /image para gerar uma imagem.');
+            }
+        }
 
         // Verificação se a mensagem é "miau"
         if (commandMsg && commandMsg.toLowerCase() === 'miau') {

@@ -1,6 +1,6 @@
 // * Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
 //
-const socket = io("https://hidden-cobweb-wr9wg666jjgr2qr5-3000.app.github.dev/");
+const socket = io("https://possessed-incantation-x59jv666q9x53pp5w-3000.app.github.dev/");
 //
 //
 
