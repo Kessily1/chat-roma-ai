@@ -22,7 +22,7 @@ socket.on("usuariosOnline", (count) => {
     atualizarContagemOnline();
 });
 
-// Evento de conexão
+// Evento de conexão com servidor:
 socket.on("connect", () => {
     console.log("Usuário conectado");
     usuariosOnline++;
@@ -42,13 +42,14 @@ socket.on('playAudio', (audioPath) => {
         });
     });
 
+// Encerrar conexão com servidor:
 socket.on("disconnect", () => {
     console.log("Usuário desconectado");
     usuariosOnline--;
     atualizarContagemOnline();
 });
     
-    // Tratando mensagens:
+    // Tratando mensagens: Identificando mensagem do usuário e mensagem do Chat bot
         socket.on("message", (msg) => {
         const isCurrentUser = msg.startsWith(`${username}:`); 
         const isBotMessage = msg.startsWith('Chat Bot:'); 
@@ -69,7 +70,7 @@ socket.on("disconnect", () => {
             messageDiv.className = 'message received';
         }
 
-        // Adiciona figura do BOT, se for uma mensagem do bot:
+        // Adiciona figura do Bot "robô" na mensagem, se for uma mensagem do bot:
         if (isBot) {
             const botImage = document.createElement('img');
             botImage.src = 'https://img.icons8.com/?size=100&id=q7wteb2_yVxu&format=png&color=000000'; 
@@ -79,7 +80,7 @@ socket.on("disconnect", () => {
         }
         
     // Verifica se a mensagem é uma URL:
-    const urlRegex = /(https?:\/\/[^\s]+)/g; // Regex para identificar URLs
+    const urlRegex = /(https?:\/\/[^\s]+)/g; 
     if (urlRegex.test(message)) {
         const img = document.createElement('img');
         img.src = message.match(urlRegex)[0]; 
@@ -87,16 +88,16 @@ socket.on("disconnect", () => {
         img.className = 'received-image'; 
         messageDiv.appendChild(img);
     } else {
-        // Adiciona o conteúdo da mensagem
+        // Adiciona o conteúdo da mensagem caso não seja uma URL:
         messageDiv.appendChild(document.createTextNode(message));
     }
 
     // Adiciona a mensagem ao chat:
     ul.appendChild(messageDiv);
 
-    // Rola automaticamente para a última mensagem:
+    // Rola automaticamente para a última mensagem: (Rolagem de tela)
     const messageBox = document.querySelector('.message-box');
-    messageBox.scrollTop = messageBox.scrollHeight; // Rola para baixo
+    messageBox.scrollTop = messageBox.scrollHeight; 
 }
 
 // Função para enviar mensagens (usuario):
@@ -105,7 +106,6 @@ function enviar() {
     const msg = msgInput.value.trim();
     const errorMessage = document.getElementById("error-message");
     errorMessage.textContent = "";
-
     if (msg) {
         const messageWithUsername = `${username}: ${msg}`;
         socket.emit("message", messageWithUsername);
@@ -136,11 +136,11 @@ function atualizarContagemOnline() {
     document.getElementById('online').textContent = usuariosOnline;
 }
 
-// Função para mostra popup de status (entrada/saida) do chat:
+// Função para mostra Poppup de status (entrada/saida) do chat:
 function mostrarPopup(mensagem) {
     document.getElementById('popup-message').textContent = mensagem;
     document.getElementById('popup').style.display = 'flex';
-    setTimeout(fecharPopup, 3000);
+    setTimeout(fecharPopup, 3000); // <-- Tempo em que janela Popup fica aberta
 }
 
 // Função para fechar popup:

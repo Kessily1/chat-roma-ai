@@ -121,7 +121,7 @@ async function generateOpenAIImage(description) {
         const newMessageAudio = '../audio/newmessage.mp3'; // <<--- caminho relativo do audio
         console.log('Mensagem recebida:', msg); 
         io.emit('message', msg); 
-        socket.emit('playAudio',newMessageAudio); // <<<<---- chama o audio
+        socket.emit('playAudio',newMessageAudio); // <<<<---- chama o audio receber / enviar mensagem
 
         // Extrai o nome de usuário e a mensagem separadamente:
         const splitMsg = msg.split(':');
@@ -245,7 +245,6 @@ async function generateOpenAIImage(description) {
 
         // Verificação de mensagem Star Wars - comando "Star Wars"
         const starWars = '../audio/starWarsTheme.mp3';
-        const starWarsImage = '../image/star-wars.jpg';
         if (commandMsg && commandMsg.toLowerCase() === 'star wars'){
             io.emit('playAudio', starWars);
             io.emit('message', `Chat Bot: Que a força esteja com você ...`);
