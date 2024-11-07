@@ -48,27 +48,27 @@ async function generateOpenAIResponse(message) {
 }
 
 //
-// Funções de imagens aleatórias a partir de texto simples: "miau","auau","raposa" e "usuário"
+// Funções de imagens aleatórias a partir de texto simples: "/miau","/auau","/raposa" e "/usuário"
 //
-// miau - Função para buscar uma imagem de gato 
+// /miau - Função para buscar uma imagem de gato 
 async function fetchCatImage() {
     const response = await axios.get('https://api.thecatapi.com/v1/images/search');
     return response.data[0].url; // Retorna a URL da imagem do gato
 }
 
-// raposa - Função para buscar uma imagem de raposa 
+// /raposa - Função para buscar uma imagem de raposa 
 async function fetchFoxImage() {
     const response = await axios.get('https://randomfox.ca/floof/');
     return response.data.image; // Retorna a URL da imagem da raposa
 }
 
-// auau - Função para buscar uma imagem de cachorro 
+// /auau - Função para buscar uma imagem de cachorro 
 async function fetchDogImage() {
     const response = await axios.get('https://random.dog/woof.json');
     return response.data.url; // Retorna a URL da imagem do cachorro
 }
 
-// usuário - Função para buscar uma imagem de usuário
+// /usuário - Função para buscar uma imagem de usuário
 async function fetchUserImage() {
     const response = await axios.get('https://randomuser.me/api/');
     return response.data.results[0].picture.large; // Retorna a URL da imagem do usuário
@@ -175,8 +175,8 @@ async function generateOpenAIImage(description) {
             }
         }
 
-        // Verificação se a mensagem é "miau":
-        if (commandMsg && commandMsg.toLowerCase() === 'miau') {
+        // Verificação se a mensagem é "/miau":
+        if (commandMsg && commandMsg.toLowerCase() === '/miau') {
             try {
                 const somGato = '../audio/somGatoMiau.wav';     // <-- Caminho pro som do gato
                 const catImageUrl = await fetchCatImage();      // Chama função imagem do gato
@@ -190,8 +190,8 @@ async function generateOpenAIImage(description) {
             }
         }
 
-        // Verificação se a mensagem é "raposa":
-        if (commandMsg && commandMsg.toLowerCase() === 'raposa') {
+        // Verificação se a mensagem é "/raposa":
+        if (commandMsg && commandMsg.toLowerCase() === '/raposa') {
             try {
                 const foxImageUrl = await fetchFoxImage();  // Chamada de função imagem da Raposa
                 io.emit('message', 'Chat Bot: Raposa ? Vou procura uma pra você...');
@@ -203,8 +203,8 @@ async function generateOpenAIImage(description) {
             }
         }
 
-        // Verificação se a mensagem é "auau":
-        if (commandMsg && commandMsg.toLowerCase() === 'auau') {
+        // Verificação se a mensagem é "/auau":
+        if (commandMsg && commandMsg.toLowerCase() === '/auau') {
             try {
                 const somDogAuau = '../audio/somDogAuau.wav';   // <--- Caminho pro som do cachorro
                 const dogImageUrl = await fetchDogImage();      // Chama função imagem do Cachorro
@@ -218,8 +218,8 @@ async function generateOpenAIImage(description) {
             }
         }
 
-        // Verificação se a mensagem é "usuario":
-        if (commandMsg && commandMsg.toLowerCase() === 'usuario') {
+        // Verificação se a mensagem é "/usuario":
+        if (commandMsg && commandMsg.toLowerCase() === '/usuario') {
             try {
                 const userImageUrl = await fetchUserImage(); // Chamada de função da foto do Usuário
                 io.emit('message', `Chat Bot: Tome uma foto de usuário comum....`);
@@ -231,21 +231,21 @@ async function generateOpenAIImage(description) {
             }
         }
 
-        // Verificação de mensagem som de Gato - comando "som de gato"
+        // Verificação de mensagem /som de Gato - comando "/som de gato"
         const gato = '../audio/somGato.wav';
-        if (commandMsg && commandMsg.toLowerCase() === 'som de gato'){
+        if (commandMsg && commandMsg.toLowerCase() === '/som de gato'){
             io.emit('playAudio', gato);
         }
 
-        // Verificação de mensagem som de Bode - comando "som de bode"
+        // Verificação de mensagem som de Bode - comando "/som de bode"
         const bode = '../audio/somBode.wav';
-        if (commandMsg && commandMsg.toLowerCase() === 'som de bode'){
+        if (commandMsg && commandMsg.toLowerCase() === '/som de bode'){
             io.emit('playAudio', bode);
         }
 
-        // Verificação de mensagem Star Wars - comando "Star Wars"
+        // Verificação de mensagem Star Wars - comando "/Star Wars"
         const starWars = '../audio/starWarsTheme.mp3';
-        if (commandMsg && commandMsg.toLowerCase() === 'star wars'){
+        if (commandMsg && commandMsg.toLowerCase() === '/star wars'){
             io.emit('playAudio', starWars);
             io.emit('message', `Chat Bot: Que a força esteja com você ...`);
         }
