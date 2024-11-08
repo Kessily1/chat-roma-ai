@@ -2,7 +2,7 @@
 function mostrarPopup(mensagem) {
     document.getElementById('popup-message').textContent = mensagem;
     document.getElementById('popup').style.display = 'flex';
-    setTimeout(fecharPopup, 3000); // Tempo que o popup fica visível
+    setTimeout(fecharPopup, 200); // Tempo que o popup fica visível
 }
 
 // Fechar popup
