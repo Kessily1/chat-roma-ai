@@ -15,7 +15,7 @@ let usuariosOnline = 0;
 let usuarios = {}; 
 
 // Definição do Middleware do Express
-app.use(express.static(__dirname)); // Serve arquivos estáticos a partir do diretório atual
+app.use(express.static(__dirname )); // Serve arquivos estáticos a partir do diretório atual
 app.use(express.json());            // Reconhece e analisa o corpo das requisições HTTP no formato JSON
 
 // Rota HTTP para o Servidor
