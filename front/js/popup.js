@@ -1,14 +1,7 @@
-// Mostrar popup para notificação de status
-function mostrarPopup(mensagem) {
-    document.getElementById('popup-message').textContent = mensagem;
-    document.getElementById('popup').style.display = 'flex';
-    setTimeout(fecharPopup, 3000); // Tempo que o popup fica visível
-}
+// // Mostrar alerta para notificação de status
+// function mostrarAlerta(mensagem) {
+//     alert(mensagem);  // Exibe a mensagem em uma caixa de alerta
+// }
 
-// Fechar popup
-function fecharPopup() {
-    document.getElementById('popup').style.display = 'none';
-}
-
-// Evento para mostrar popup quando um usuário entra/sai
-socket.on('userStatus', mostrarPopup);
+// // Evento para mostrar alerta quando um usuário entra/sai
+// socket.on('userStatus', mostrarAlerta);

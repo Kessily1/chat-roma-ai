@@ -239,7 +239,7 @@ async function generateOpenAIImage(description) {
 
         // Verificação de mensagem som de Bode - comando "/som de bode"
         const bode = '../audio/somBode.wav';
-        if (commandMsg && commandMsg.toLowerCase() === '/som de bode'){
+        if (commandMsg && commandMsg.toLowerCase() === '/bode'){
             io.emit('playAudio', bode);
         }
 
