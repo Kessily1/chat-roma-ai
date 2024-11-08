@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles_login.css">
+    <link rel="stylesheet" href="../styles/styles_login.css">
     <title>Login</title>
     
 </head>
@@ -30,13 +30,19 @@
 
 <script>
     // Manipulando dados locais:
-    function login() {
+    async function login() {
         const username = document.getElementById("username").value.trim();
         if (username) {
-            localStorage.setItem("username", username);
-            window.location.href = "chat.html"; 
+            const response = await fetch(`/api/username?username=${username}`);
+            const data = await response.json();
+            if (data.success) {
+                localStorage.setItem("username", username);
+                window.location.href = "index.html";
+            } else {
+                alert(data.message);
+            }
         } else {
-            alert("Por favor, digite um nome."); 
+            alert("Por favor, digite um nome.");
         }
     }
 

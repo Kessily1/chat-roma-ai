@@ -1,11 +1,7 @@
-// * Atenção: Para testes verifique seu Link e insira no SOCKET abaixo:
-//
-const socket = io("https://supreme-funicular-jjqjvp5qw96w35jj4-3000.app.github.dev/");
-//
-//
+const socket = io();
 
 if (!localStorage.getItem("username")) {
-    window.location.href = "/front/login.html"; 
+    window.location.href = "../login.html"; 
 }
 
 const username = localStorage.getItem("username") || "Usuário Anônimo";
@@ -40,7 +36,7 @@ socket.on('playAudio', (audioPath) => {
         .catch((error) => {
             console.error('Erro ao tentar reproduzir o áudio:', error);
         });
-    });
+});
 
 // Encerrar conexão com servidor:
 socket.on("disconnect", () => {
@@ -49,36 +45,36 @@ socket.on("disconnect", () => {
     atualizarContagemOnline();
 });
     
-    // Tratando mensagens: Identificando mensagem do usuário e mensagem do Chat bot
-        socket.on("message", (msg) => {
-        const isCurrentUser = msg.startsWith(`${username}:`); 
-        const isBotMessage = msg.startsWith('Chat Bot:'); 
-        
-        // Chama displayMessage com a verificação correta:
-        displayMessage(msg, isBotMessage, isCurrentUser);
-    });
+// Tratando mensagens: Identificando mensagem do usuário e mensagem do Chat bot
+socket.on("message", (msg) => {
+    const isCurrentUser = msg.startsWith(`${username}:`); 
+    const isBotMessage = msg.startsWith('Chat Bot:'); 
+    
+    // Chama displayMessage com a verificação correta:
+    displayMessage(msg, isBotMessage, isCurrentUser);
+});
 
-    // Função para exibir mensagens: (displayMessage)
-    function displayMessage(message, isBot, isUser) {
-        const ul = document.querySelector("ul");
-        const messageDiv = document.createElement('li');
-        if (isBot) {
-            messageDiv.className = 'message chatbot';
-        } else if (isUser) {
-            messageDiv.className = 'message sent';
-        } else {
-            messageDiv.className = 'message received';
-        }
+// Função para exibir mensagens: (displayMessage)
+function displayMessage(message, isBot, isUser) {
+    const ul = document.querySelector("ul");
+    const messageDiv = document.createElement('li');
+    if (isBot) {
+        messageDiv.className = 'message chatbot';
+    } else if (isUser) {
+        messageDiv.className = 'message sent';
+    } else {
+        messageDiv.className = 'message received';
+    }
 
-        // Adiciona figura do Bot "robô" na mensagem, se for uma mensagem do bot:
-        if (isBot) {
-            const botImage = document.createElement('img');
-            botImage.src = 'https://img.icons8.com/?size=100&id=q7wteb2_yVxu&format=png&color=000000'; 
-            botImage.alt = 'Bot'; 
-            botImage.className = 'bot-image'; 
-            messageDiv.appendChild(botImage); 
-        }
-        
+    // Adiciona figura do Bot "robô" na mensagem, se for uma mensagem do bot:
+    if (isBot) {
+        const botImage = document.createElement('img');
+        botImage.src = 'https://img.icons8.com/?size=100&id=q7wteb2_yVxu&format=png&color=000000'; 
+        botImage.alt = 'Bot'; 
+        botImage.className = 'bot-image'; 
+        messageDiv.appendChild(botImage); 
+    }
+    
     // Verifica se a mensagem é uma URL:
     const urlRegex = /(https?:\/\/[^\s]+)/g; 
     if (urlRegex.test(message)) {

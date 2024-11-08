@@ -3,7 +3,14 @@ const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 const axios = require('axios');
+const path = require('path');
 require('dotenv').config(); // Carrega as variáveis de ambiente
+
+// API LIST
+const fetchFoxImage = require('./api-resources/fox-api');
+const fetchCatImage = require('./api-resources/cat-api');
+const fetchDogImage = require('./api-resources/dog-api');
+const fetchUserImage = require('./api-resources/user-api');
 
 // Criação da aplicação e do servidor
 const app = express();
@@ -15,16 +22,16 @@ let usuariosOnline = 0;
 let usuarios = {}; 
 
 // Definição do Middleware do Express
-app.use(express.static(__dirname)); // Serve arquivos estáticos a partir do diretório atual
+app.use(express.static(path.join(__dirname, 'front'))); // Serve arquivos estáticos a partir do diretório 'front'
 app.use(express.json());            // Reconhece e analisa o corpo das requisições HTTP no formato JSON
 
 // Rota HTTP para o Servidor
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/front/chat.html");
+    res.sendFile(path.join(__dirname, 'front', 'index.html'));
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/front/login.html');
+    res.sendFile(path.join(__dirname, 'front', 'login.html'));
 });
 
 // Função para chamar a API da OpenAI para texto
@@ -45,33 +52,6 @@ async function generateOpenAIResponse(message) {
         console.error('Erro ao chamar a API da OpenAI:', error.response ? error.response.data : error.message);
         throw error;
     }
-}
-
-//
-// Funções de imagens aleatórias a partir de texto simples: "miau","auau","raposa" e "usuário"
-//
-// miau - Função para buscar uma imagem de gato 
-async function fetchCatImage() {
-    const response = await axios.get('https://api.thecatapi.com/v1/images/search');
-    return response.data[0].url; // Retorna a URL da imagem do gato
-}
-
-// raposa - Função para buscar uma imagem de raposa 
-async function fetchFoxImage() {
-    const response = await axios.get('https://randomfox.ca/floof/');
-    return response.data.image; // Retorna a URL da imagem da raposa
-}
-
-// auau - Função para buscar uma imagem de cachorro 
-async function fetchDogImage() {
-    const response = await axios.get('https://random.dog/woof.json');
-    return response.data.url; // Retorna a URL da imagem do cachorro
-}
-
-// usuário - Função para buscar uma imagem de usuário
-async function fetchUserImage() {
-    const response = await axios.get('https://randomuser.me/api/');
-    return response.data.results[0].picture.large; // Retorna a URL da imagem do usuário
 }
 
 // Função para chamar a API da OpenAI para imagens:
@@ -95,13 +75,32 @@ async function generateOpenAIImage(description) {
     }
 }
 
-// Conectando usuário ao Servidor:
+// Endpoints HTTP para chamar a API da OpenAI para texto e imagens
+app.post('/api/openai/text', async (req, res) => {
+    const { message } = req.body;
+    try {
+        const response = await generateOpenAIResponse(message);
+        res.json({ response });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao gerar resposta de texto' });
+    }
+});
 
-    // Emite audio no login:
-    io.on('connection', (socket) => {
-        console.log('Usuário conectado: ' + socket.id); // <- informa usuario conectado
-        const login_audio = '../audio/easychatlogin.mp3'; // <- toca arquivo mp3
-        socket.emit('playAudio', login_audio);    
+app.post('/api/openai/image', async (req, res) => {
+    const { description } = req.body;
+    try {
+        const imageUrl = await generateOpenAIImage(description);
+        res.json({ url: imageUrl });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao gerar imagem' });
+    }
+});
+
+// Conectando usuário ao Servidor:
+io.on('connection', (socket) => {
+    console.log('Usuário conectado: ' + socket.id); // <- informa usuario conectado
+    const login_audio = '../audio/easychatlogin.mp3'; // <- toca arquivo mp3
+    socket.emit('playAudio', login_audio);    
 
     // Configuração de nome de usuário:
     socket.on('setUsername', (user) => {
@@ -114,7 +113,6 @@ async function generateOpenAIImage(description) {
         io.emit('usuariosOnline', usuariosOnline);
         io.emit('userStatus', `${user} entrou no chat`);    
     });
-  
 
     // Tratamento de mensagem recebida:
     socket.on('message', async (msg) => {
@@ -262,9 +260,6 @@ async function generateOpenAIImage(description) {
             io.emit('userStatus', `${user} saiu do chat`);
         }
     });
-
-
-
 });
 
 // Inicia o servidor
