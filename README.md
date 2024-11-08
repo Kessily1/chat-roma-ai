@@ -36,4 +36,12 @@ Esta branch contém os arquivos base do projeto Chat-Roma-Ai.
 2. Inserção de SONS no projeto do chat - EDUARDO
 3. teste - GILVAN
 
+   ### Semana 08/11/24
+1. Ajuste de Responsividade do projeto **Kássily**
+2. Ajuste das Dimensões da Imagem da API **Null**
+3. Estruturação e Modularização do Projeto **Kássily**
+4. Atualização e chamda de função **Kaio**
+5. Substituído popup por alert e comando /som de bode por /bode.***Leo***
+
+
 
