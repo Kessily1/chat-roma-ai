@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles_chat.css">
+    <title>Chat</title>
+</head>
+
+<body>
+<header>
+    <div class="icon">
+        
+        <h1>Easy Chat</h1>
+        <img src="https://img.icons8.com/?size=100&id=42782&format=png&color=000000" alt="ícone easy chat" width="100">
+    </div>
+</header>
+
+<div class="container">
+    <div class="message-box">
+        <ul></ul>
+    </div>
+    <div class="chat-container" id="chat-container">
+        <!-- As mensagens serão inseridas aqui dinamicamente -->
+    </div>
+    <div id="chat-form">
+        <input type="text" id="message-input" placeholder="Digite sua mensagem">
+        <button onclick="enviar()">Enviar</button>
+        <button onclick="logout()">Sair</button>
+    </div>
+    
+    <section>
+        <div>
+            <p>Usuários On-Line: <b id="online">0</b></p>
+            <p>Meu nome de usuário: <b id="meuNomeUsuario"></b></p>
+        </div>
+        <div>
+            <img src="https://img.icons8.com/?size=100&id=RiQFWoQQ4lQE&format=png&color=000000" alt="Ícone de Usuário" width="80">
+        </div>
+    </section> 
+    <div id="error-message" style="color: red; margin-top: 10px;"></div> 
+</div>
+    
+<audio id="notificationSound" src="" preload="auto"></audio>
+
+    <!-- Aqui vai o popup -->
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">       
+            <span class="close" onclick="fecharPopup()">&times;</span>
+            <p id="popup-message"></p>
+        </div>
+    </div>
+
+<footer>
+    <div class="footer-message">
+        Desenvolvido por <b>EquipeX &copy;</b> - 2024
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.0/socket.io.js"></script>
+<script src="/front/js/socketConfig.js"></script>
+<script src="/front/js/userInteraction.js"></script>
+<script src="/front/js/messageDisplay.js"></script>
+<script src="/front/js/popup.js"></script>
+<script src="/front/js/onlineCount.js"></script>
+
+
+
+</body>
+</html>
+
+        
+
+
+
+  
