@@ -1,5 +1,5 @@
 // socketConfig.js
-const socket = io("https://zany-space-robot-x5rpp9xp4qxrfp7w4-3000.app.github.dev/");
+const socket = io("https://solid-funicular-jjqjvp5qw7gx3pw4w-3000.app.github.dev/");
 
 if (!localStorage.getItem("username")) {
     window.location.href = "/front/login.html"; 

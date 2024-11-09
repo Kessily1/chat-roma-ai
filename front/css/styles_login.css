@@ -124,10 +124,12 @@ a:hover {
 
     input {
         font-size: 14px; /* Diminui o tamanho da fonte dos inputs */
+        width: 100%; /* Garante que o input ocupe toda a largura disponível */
     }
 
     button {
         font-size: 14px; /* Diminui o tamanho da fonte do botão */
+        width: 100%; /* Garante que o botão ocupe toda a largura disponível */
     }
 
     .footer {
