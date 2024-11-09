@@ -38,14 +38,15 @@ Esta branch contém os arquivos base do projeto Chat-Roma-Ai.
 2. Inserção de SONS no projeto do chat - EDUARDO
 3. teste - GILVAN
 
-   ### Semana 08/11/24
-1. Ajuste de Responsividade do projeto **Kássily**
-2. Ajuste das Dimensões da Imagem da API **Null**
-3. Estruturação e Modularização do Projeto **Kássily**
-4. Atualização e chamda de função **Kaio**
-5. Substituído popup por alert e comando /som de bode por /bode **Leonardo**
-6. Ajuste do Layout ***Eduardo***
-7. Testes de funcionalidade ***Gilvan***
+---
+
+### Semana 08/11/24
+3. Atualização e chamada de função. **Kaio**
+1. Ajuste de Responsividade do projeto. **Kássily**
+2. Ajuste na arquitetura - Refatoração do front-end. **Kássily**
+4. Substituído popup por alert e comando /som de bode por /bode. **Leonardo**
+5. Refatoração do socketio.js - Reajuste na Responsividade. **Eduardo**
+6. Substituição do popup por alert e alteração do comando /som de bode para /bode. **eduardo**
 
 
 
