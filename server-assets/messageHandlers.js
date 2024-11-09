@@ -4,12 +4,12 @@ const { playNewMessageAudio, playErrorAudio, playCatSound, playDogSound, playGat
 async function handleCommand(socket, io, command, handler, successMessage, errorMessage, sound) {
     try {
         const result = await handler();
-        io.emit('message', successMessage);
-        io.emit('message', `Chat Bot: ${result}`);
+        if (successMessage) io.emit('message', successMessage);
+        if (result) io.emit('message', `Chat Bot: ${result}`);
         if (sound) sound(socket);
     } catch (error) {
         console.error(errorMessage, error);
-        io.emit('message', `Chat Bot: ${errorMessage}`);
+        if (errorMessage) io.emit('message', `Chat Bot: ${errorMessage}`);
         playErrorAudio(socket);
     }
 }
@@ -27,6 +27,9 @@ async function handleMessage(socket, msg, io) {
     }
     
     const commandMsg = splitMsg.slice(1).join(':').trim();
+    if (commandMsg.toLowerCase() === '/help') {
+        io.emit('message', 'Chat Bot: Comandos disponíveis: /miau, /raposa, /auau, /usuario, /som de gato, /som de bode, /star wars, /text e /image.');
+    }
 
     if (commandMsg.toLowerCase().startsWith('/text')) {          
         const userMessage = commandMsg.slice(6).trim(); 
@@ -69,9 +72,9 @@ async function handleMessage(socket, msg, io) {
             '/raposa': { handler: fetchFoxImage, successMessage: 'Chat Bot: Raposa? Vou procurar uma pra você...', errorMessage: 'Ops! Não consegui encontrar uma imagem de raposa.' },
             '/auau': { handler: fetchDogImage, successMessage: 'Chat Bot: Auau? Isso é coisa de cachorro... Vou chamar...', errorMessage: 'Ops! Não consegui encontrar uma imagem de cachorro.', sound: playDogSound },
             '/usuario': { handler: fetchUserImage, successMessage: 'Chat Bot: Tome uma foto de usuário comum...', errorMessage: 'Ops! Não consegui encontrar uma imagem de usuário.' },
-            '/som de gato': { handler: () => Promise.resolve(), successMessage: '', errorMessage: '', sound: playGatoSound },
-            '/som de bode': { handler: () => Promise.resolve(), successMessage: '', errorMessage: '', sound: playBodeSound },
-            '/star wars': { handler: () => Promise.resolve(), successMessage: 'Chat Bot: Que a força esteja com você...', errorMessage: '', sound: playStarWarsTheme }
+            '/som de gato': { handler: () => Promise.resolve(), successMessage: null, errorMessage: null, sound: playGatoSound },
+            '/som de bode': { handler: () => Promise.resolve(), successMessage: null, errorMessage: null, sound: playBodeSound },
+            '/star wars': { handler: () => Promise.resolve(), successMessage: null, errorMessage: null, sound: playStarWarsTheme }
         };
 
         const command = commands[commandMsg.toLowerCase()];

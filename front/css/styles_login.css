@@ -5,8 +5,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Adicionado para centralizar horizontalmente */
     height: 100vh; /* Corrigido '100hv' para '100vh' */
-    margin: 90px;
+    margin: 0; /* Ajustado para remover margens */
     text-align: center;
 }
 
@@ -21,7 +22,7 @@ body {
     box-shadow: 2px 5px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 300px;
-    margin: auto;
+    margin: 0; /* Ajustado para remover margens */
     transition: transform 0.3s ease;
 }
 
@@ -92,6 +93,9 @@ button:hover {
     color: #2c3e50;
     width: 100%;
     bottom: 10px;
+    position: absolute; /* Adicionado para posicionar o rodapé */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta a posição para centralizar */
 }
 
 a {
@@ -106,7 +110,7 @@ a:hover {
 /* Ajustes para dispositivos móveis (max-width: 600px) */
 @media (max-width: 600px) {
     body {
-        margin: 10px; /* Diminui a margem nas telas menores */
+        margin: 0; /* Ajustado para remover margens */
     }
 
     .login-container {
@@ -138,5 +142,7 @@ a:hover {
 
     .footer-message {
         font-size: 10px; /* Ajusta o tamanho da fonte da mensagem de rodapé */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Ajusta a posição para centralizar */
     }
 }

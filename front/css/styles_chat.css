@@ -8,7 +8,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 100hv;
 }
 
 h1 {
@@ -21,8 +21,8 @@ h1 {
 .icon {
     display: flex;
     text-align: center;
-    margin: 10px 0;
-    gap: 15px;
+    margin: 5px 0;
+    gap: 10px;
 }
 
 .container {
@@ -31,7 +31,7 @@ h1 {
     border-radius: 15px;
     width: 100%;
     max-width: 380px;
-    height: 480px;
+    height: 450px;
     box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     border: 1px solid #b0b0b0;

@@ -1,5 +1,7 @@
 // socketConfig.js
-const socket = io("https://solid-funicular-jjqjvp5qw7gx3pw4w-3000.app.github.dev/");
+
+// Mude a URL do socket na linha abaixo:
+const socket = io("https://obscure-goldfish-97j7rg9j45992g4p-3000.app.github.dev/");
 
 if (!localStorage.getItem("username")) {
     window.location.href = "/front/login.html"; 
