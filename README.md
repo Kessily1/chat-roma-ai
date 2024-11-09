@@ -46,7 +46,7 @@ Esta branch contém os arquivos base do projeto Chat-Roma-Ai.
 2. Ajuste na arquitetura - Refatoração do front-end. **Kássily**
 4. Substituído popup por alert e comando /som de bode por /bode. **Leonardo**
 5. Refatoração do socketio.js - Reajuste na Responsividade. **Eduardo**
-6. Substituição do popup por alert e alteração do comando /som de bode para /bode. **eduardo**
+6. Correção de links de áudio, otimização de comandos e adição do comando /help. **eduardo**
 
 
 
