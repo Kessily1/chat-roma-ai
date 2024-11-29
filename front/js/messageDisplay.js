@@ -23,7 +23,6 @@ function displayMessage(message, isBot, isUser) {
         botImage.alt = 'Bot';
         botImage.className = 'bot-image';
         messageDiv.appendChild(botImage);
-        scrollToBottom();
     }
 
     const urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -32,14 +31,14 @@ function displayMessage(message, isBot, isUser) {
         img.src = message.match(urlRegex)[0];
         img.alt = 'Imagem recebida';
         img.className = 'received-image';
+        img.onload = () => scrollToBottom(); // Rola para o final após a imagem ser carregada
         messageDiv.appendChild(img);
     } else {
         messageDiv.appendChild(document.createTextNode(message));
     }
 
     ul.appendChild(messageDiv);
-    const messageBox = document.querySelector('.message-box');
-    messageBox.scrollTop = messageBox.scrollHeight;
+    scrollToBottom(); // Adiciona a função para rolar para a última mensagem
 }
 
 function scrollToBottom() {
