@@ -3,6 +3,7 @@ socket.on("message", (msg) => {
     const isCurrentUser = msg.startsWith(`${username}:`);
     const isBotMessage = msg.startsWith('Chat Bot:');
     displayMessage(msg, isBotMessage, isCurrentUser);
+    scrollToBottom(); // Adiciona a função para rolar para a última mensagem
 });
 
 function displayMessage(message, isBot, isUser) {
@@ -22,6 +23,7 @@ function displayMessage(message, isBot, isUser) {
         botImage.alt = 'Bot';
         botImage.className = 'bot-image';
         messageDiv.appendChild(botImage);
+        scrollToBottom();
     }
 
     const urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -36,6 +38,11 @@ function displayMessage(message, isBot, isUser) {
     }
 
     ul.appendChild(messageDiv);
+    const messageBox = document.querySelector('.message-box');
+    messageBox.scrollTop = messageBox.scrollHeight;
+}
+
+function scrollToBottom() {
     const messageBox = document.querySelector('.message-box');
     messageBox.scrollTop = messageBox.scrollHeight;
 }

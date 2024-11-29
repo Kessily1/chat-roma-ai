@@ -9,6 +9,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100hv;
+    height: 100vh; /* Ajuste para garantir que o corpo ocupe toda a altura da tela */
 }
 
 h1 {
@@ -31,7 +32,7 @@ h1 {
     border-radius: 15px;
     width: 100%;
     max-width: 380px;
-    height: 450px;
+    height: calc(100vh - 40px); /* Ajuste para ocupar a altura total da tela menos a margem */
     box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     border: 1px solid #b0b0b0;
@@ -52,6 +53,7 @@ h1 {
     margin-bottom: 15px;
     border: 2px solid #2c3e50;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1; /* Permite que a caixa de mensagens cresça para ocupar o espaço disponível */
 }
 
 .message-box:hover {
@@ -131,6 +133,11 @@ ul {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: sticky; /* Torna o formulário fixo */
+    bottom: 0; /* Fixa o formulário na parte inferior */
+    background-color: #f1f1f1; /* Cor de fundo para o formulário */
+    padding: 10px; /* Espaçamento interno */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar o formulário */
 }
 
 section {
@@ -217,7 +224,7 @@ button:hover {
     .container {
         width: 90%;
         padding: 15px;
-        height: 100%;
+        height: calc(100vh - 30px); /* Ajuste para dispositivos móveis */
     }
 
     h1 {
@@ -226,6 +233,7 @@ button:hover {
 
     .message-box {
         height: 65%;
+        height: auto; /* Ajuste para permitir crescimento automático */
     }
 
     input[type="text"] {
@@ -251,6 +259,7 @@ button:hover {
         flex-direction: column;
         align-items: stretch;
         justify-content: space-between;
+        padding: 5px; /* Ajuste de espaçamento para dispositivos móveis */
     }
 
     input[type="text"] {
